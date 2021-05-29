@@ -61,10 +61,11 @@ jobs:
       # If GITHUB_TOKEN isn't available (e.g. in PRs) returns no tags [].
       - name: Get list of tags
         id: gettags
-        uses: jupyterhub/action-major-minor-tag-calculator@v1
+        uses: manics/action-major-minor-tag-calculator@branchRegex
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           prefix: "jupyterhub/configurable-http-proxy:"
+          branchRegex: "^[^/]+$"
 
       - name: Display tags
         run: echo "Docker tags ${{ steps.gettags.outputs.tags }}"
